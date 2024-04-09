@@ -131,47 +131,50 @@ def create_network(df,
 
     # Create edgelist
     #if edge_weight_filter is not None and (random_subject != True or type(random_subject)==int):
-    if node_degree_filter is not None and (edge_weight_filter is None or edge_weight_filter == 0):
-        if network_type == 1:
-            counts = simpler_network_1.preprocess_edgelist(df, threshold=node_degree_filter[0], what_column=what_column, what_next_column=what_next_column)
-            # Sort by weight in descending order
-            counts.sort_values(by='weight', ascending=False, inplace=True)
-            # Extract integer part from the 'source' column
-            counts['s_i'] = counts['source'].str.extract('(\d+)').astype('int')
-            counts = counts.sort_values(by='s_i')
-            # Apply the update_edge function
-            counts = simpler_network_1.update_edgelist(counts, threshold=node_degree_filter[1])
-            # Fix nodes at level1 
-            counts = simpler_network_1.remove_node_level1(counts)
-            # Fix nodes at last level
-            counts = simpler_network_1.remove_node_last_level(counts)
-        # else:
-            # counts = simpler_network_2.process_allgroups(df, threshold=node_degree_filter[0], what_column=what_column, what_next_column=what_next_column)
-            # # Sort by weight in descending order
-            # counts.sort_values(by='weight', ascending=False, inplace=True)
-            # # Extract integer part from the 'source' column
-            # counts['s_i'] = counts['source'].str.extract('(\d+)').astype('int')
-            # counts = counts.sort_values(by='s_i')
-            # # Apply the update_edge function
-            # counts = simpler_network_2.update_edgelist(counts, threshold=node_degree_filter[1])
-            # # Fix nodes at level1 
-            # counts = simpler_network_2.remove_node_level1(counts)
-            # # Fix nodes at last level
-            # counts = simpler_network_2.remove_node_last_level(counts)
+    if node_degree_filter is not None:
+        if edge_weight_filter is None or edge_weight_filter == 0:
+            if network_type == 1:
+                counts = simpler_network_1.preprocess_edgelist(df, threshold=node_degree_filter[0], what_column=what_column, what_next_column=what_next_column)
+                # Sort by weight in descending order
+                counts.sort_values(by='weight', ascending=False, inplace=True)
+                # Extract integer part from the 'source' column
+                counts['s_i'] = counts['source'].str.extract('(\d+)').astype('int')
+                counts = counts.sort_values(by='s_i')
+                # Apply the update_edge function
+                counts = simpler_network_1.update_edgelist(counts, threshold=node_degree_filter[1])
+                # Fix nodes at level1 
+                counts = simpler_network_1.remove_node_level1(counts)
+                # Fix nodes at last level
+                counts = simpler_network_1.remove_node_last_level(counts)
 
-            # Create network from edgelist
-            G = nx.from_pandas_edgelist(counts, create_using=nx.DiGraph(),
-                                    source='source', target='target', edge_attr='weight')
-
-    elif node_degree_filter is None and (edge_weight_filter is not None or edge_weight_filter==0):
-        counts = df.groupby([what_column, what_next_column]).size().reset_index(name='weight')
-        counts.rename(columns={what_column: 'source', what_next_column: 'target'}, inplace=True)
-        if random_subject != True or type(random_subject)==int:
-            counts = counts.loc[counts['weight'] > edge_weight_filter]
+            # else:
+                # counts = simpler_network_2.process_allgroups(df, threshold=node_degree_filter[0], what_column=what_column, what_next_column=what_next_column)
+                # # Sort by weight in descending order
+                # counts.sort_values(by='weight', ascending=False, inplace=True)
+                # # Extract integer part from the 'source' column
+                # counts['s_i'] = counts['source'].str.extract('(\d+)').astype('int')
+                # counts = counts.sort_values(by='s_i')
+                # # Apply the update_edge function
+                # counts = simpler_network_2.update_edgelist(counts, threshold=node_degree_filter[1])
+                # # Fix nodes at level1 
+                # counts = simpler_network_2.remove_node_level1(counts)
+                # # Fix nodes at last level
+                # counts = simpler_network_2.remove_node_last_level(counts)
     
-        # Create network from edgelist
-        G = nx.from_pandas_edgelist(counts, create_using=nx.DiGraph(),
-                                    source='source', target='target', edge_attr='weight')
+    else:
+        # Create edgelist
+        counts = df.groupby([what_column, what_next_column]
+                            ).size().reset_index(name='count')
+        counts = counts.rename(columns={what_column: 'source', what_next_column: 'target',
+                                        'count': 'weight'}).sort_values('weight', ascending=False).reset_index(drop=True)
+
+        if edge_weight_filter is not None and (random_subject != True or type(random_subject)==int):
+            counts = counts.loc[counts['weight'] > edge_weight_filter]
+
+    
+    # Create network from edgelist
+    G = nx.from_pandas_edgelist(counts, create_using=nx.DiGraph(),
+                                source='source', target='target', edge_attr='weight')
 
     ## NODES ATTRIBUTES ##
 
