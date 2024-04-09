@@ -24,8 +24,6 @@ In this section, we describe three different approaches for processing time diar
 
 By employing these three approaches, we can explore the time diary data from various angles, revealing different aspects and patterns of human activities. Depending on the research objectives and analytical requirements, one or a combination of these approaches can be used to gain valuable insights from the data.
 
-It is recommended to set the parameter `categories` at the beginning of the code for the following functions. This approach facilitates the avoidance of errors by ensuring consistency across functions. For instance, if the parameter is set to a specific value (e.g., 'all') in one function, it should be set to the same value in other related functions as well.
-
 ### 2. `my_network_functions.py` and `simpler_network_1.py`
 
 This module provides a set of functions for creating, manipulating, and visualizing DAGs based on time diary data. Key functionalities include:
