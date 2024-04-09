@@ -4,6 +4,8 @@
 
 This toolkit is designed to preprocess time diary data and visualize sequences of activities as Directed Acyclic Graphs (DAGs). It is suitable for analyzing and visualizing both individual and collective patterns of time use, with the functionality split across three main modules:  `data_processing.py`, `my_network_functions.py` and `simpler_network_1.py`.
 
+<img src="images/time.png" alt= “” width=70% height=70%>
+
 ## Modules
 
 ### 1. Activity Sequence Extraction Methods `data_processing.py`
