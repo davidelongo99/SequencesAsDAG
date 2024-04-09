@@ -4,8 +4,6 @@
 
 This toolkit is designed to preprocess time diary data and visualize sequences of activities as Directed Acyclic Graphs (DAGs). It is suitable for analyzing and visualizing both individual and collective patterns of time use, with the functionality split across three main modules:  `data_processing.py`, `my_network_functions.py` and `simpler_network_1.py`.
 
-<img src="images/time.png" alt= “” width=70% height=70%>
-
 ## Modules
 
 ### 1. Activity Sequence Extraction Methods `data_processing.py`
@@ -15,14 +13,19 @@ In this section, we describe three different approaches for processing time diar
 * Approach 1: Fixed-Length Sequences with Time Intervals
 
     To begin, we create sequences of fixed length, specifically 48 elements. The primary consideration for this approach is the time intervals. We establish a reference point in time from which we start counting the intervals. By default, the reference point is set at 5 a.m., which represents the first interval of the day. This approach allows us to segment the activities based on the predefined time intervals, providing a consistent framework for analysis.
+  <img src="images/time.png" alt= “” width=100% height=100%>
   
 * Approach 2: Transition-Based Sequences
 
     In the second approach, we focus solely on transitions between activities, without considering the time intervals. Similar to the first approach, all sequences start at a specific time interval. This method emphasizes the movement and changes between different activities, disregarding the duration of each activity. It offers insights into activity patterns and preferences based on the transitions observed.
 
+    <img src="images/transitions.png" alt= “” width=100% height=100%>
+
 * Approach 3: Combined Time Intervals and Transition Sequences
 
     The third approach combines both time intervals and transitions between activities, incorporating the advantages of the previous two methods. This approach enables a comprehensive understanding of the data by considering both the time intervals and the transitions between different states. By integrating these two aspects, we gain insights into both the temporal and sequential dimensions of the activity sequences.
+
+  <img src="images/time_transitions.png" alt= “” width=100% height=100%>
 
 By employing these three approaches, we can explore the time diary data from various angles, revealing different aspects and patterns of human activities. Depending on the research objectives and analytical requirements, one or a combination of these approaches can be used to gain valuable insights from the data.
 
