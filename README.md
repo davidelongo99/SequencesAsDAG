@@ -19,13 +19,13 @@ In this section, we describe three different approaches for processing time diar
 
     In the second approach, we focus solely on transitions between activities, without considering the time intervals. Similar to the first approach, all sequences start at a specific time interval. This method emphasizes the movement and changes between different activities, disregarding the duration of each activity. It offers insights into activity patterns and preferences based on the transitions observed.
 
-    <img src="images/transitions.png" alt= “” width=100% height=100%>
+    <img src="images/transitions.png" alt= “” width=80% height=80%>
 
 * Approach 3: Combined Time Intervals and Transition Sequences
 
     The third approach combines both time intervals and transitions between activities, incorporating the advantages of the previous two methods. This approach enables a comprehensive understanding of the data by considering both the time intervals and the transitions between different states. By integrating these two aspects, we gain insights into both the temporal and sequential dimensions of the activity sequences.
 
-  <img src="images/time_transitions.png" alt= “” width=100% height=100%>
+  <img src="images/time_transitions.png" alt= “” width=80% height=80%>
 
 By employing these three approaches, we can explore the time diary data from various angles, revealing different aspects and patterns of human activities. Depending on the research objectives and analytical requirements, one or a combination of these approaches can be used to gain valuable insights from the data.
 
